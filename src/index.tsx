@@ -7,12 +7,14 @@ import AddProduct from './pages/AddProduct';
 import AllProducts from './pages/AllProducts';
 import MyCart from './pages/MyCart';
 import ProductDetail from './pages/ProductDetail';
+import NotFound from './pages/NotFound';
 import './index.css';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
+    errorElement: <NotFound />,
     children: [
       {
         path: 'products',

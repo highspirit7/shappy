@@ -1,12 +1,14 @@
 import React from 'react';
 import type { FC } from 'react';
-import './App.css';
 import { Outlet } from 'react-router-dom';
+
+import Navbar from './components/Navbar';
+import './App.css';
 
 const Home: FC = () => {
   return (
     <div className="bg-white">
-      <header className="w-full h-16">Header</header>
+      <Navbar />
       <Outlet />
     </div>
   );
