@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingBag } from 'react-icons/fi';
 import { BsPencilFill, BsCart } from 'react-icons/bs';
 
-import { login, logout } from '../api/firebase';
+import { login, logout, onUserStateChanged } from '../api/firebase';
 
 import type { User } from 'firebase/auth';
 
@@ -18,6 +18,10 @@ const Navbar: FC = (props) => {
   const handleLogout = (): void => {
     logout().then(setUser).catch(console.error);
   };
+
+  useEffect(() => {
+    onUserStateChanged(setUser);
+  }, []);
 
   return (
     <header className="flex justify-between border-b border-gray-300 p-4">

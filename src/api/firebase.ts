@@ -3,7 +3,8 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
-  signOut
+  signOut,
+  onAuthStateChanged
 } from 'firebase/auth';
 
 import type { User } from 'firebase/auth';
@@ -44,4 +45,10 @@ export async function logout(): Promise<null> {
       console.error(error);
       return null;
     });
+}
+
+export function onUserStateChanged(callback: (arg: User | null) => void): void {
+  onAuthStateChanged(auth, (user) => {
+    callback(user);
+  });
 }
