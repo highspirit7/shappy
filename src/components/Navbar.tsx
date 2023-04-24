@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingBag } from 'react-icons/fi';
 import { BsPencilFill, BsCart } from 'react-icons/bs';
 
+import { login, logout } from '../api/firebase';
+
+import type { User } from 'firebase/auth';
+
 const Navbar: FC = (props) => {
+  const [user, setUser] = useState<null | User>(null);
+
+  const handleLogin = (): void => {
+    login().then(setUser).catch(console.error);
+  };
+
+  const handleLogout = (): void => {
+    logout().then(setUser).catch(console.error);
+  };
+
   return (
     <header className="flex justify-between border-b border-gray-300 p-4">
       <Link to="/" className="flex items-center text-4xl text-brand">
@@ -19,7 +33,23 @@ const Navbar: FC = (props) => {
         <Link to="/products/add" className="text-2xl">
           <BsPencilFill />
         </Link>
-        <button>Login</button>
+        {user != null ? (
+          <button
+            onClick={() => {
+              handleLogout();
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              handleLogin();
+            }}
+          >
+            Login
+          </button>
+        )}
       </nav>
     </header>
   );

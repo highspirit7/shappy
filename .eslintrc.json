@@ -4,7 +4,11 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["plugin:react/recommended", "standard-with-typescript"],
+  "extends": [
+    "plugin:react/recommended",
+    "standard-with-typescript",
+    "prettier"
+  ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -16,6 +20,8 @@
   "rules": {
     "@typescript-eslint/semi": "off",
     "space-before-function-paren": "off",
-    "semi": "off"
+    "semi": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/space-before-function-paren": "off"
   }
 }
