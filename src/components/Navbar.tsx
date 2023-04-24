@@ -12,11 +12,11 @@ const Navbar: FC = (props) => {
   const [user, setUser] = useState<null | User>(null);
 
   const handleLogin = (): void => {
-    login().then(setUser).catch(console.error);
+    login().catch(console.error);
   };
 
   const handleLogout = (): void => {
-    logout().then(setUser).catch(console.error);
+    logout().catch(console.error);
   };
 
   useEffect(() => {
@@ -38,21 +38,9 @@ const Navbar: FC = (props) => {
           <BsPencilFill />
         </Link>
         {user != null ? (
-          <button
-            onClick={() => {
-              handleLogout();
-            }}
-          >
-            Logout
-          </button>
+          <button onClick={handleLogout}>Logout</button>
         ) : (
-          <button
-            onClick={() => {
-              handleLogin();
-            }}
-          >
-            Login
-          </button>
+          <button onClick={handleLogin}>Login</button>
         )}
       </nav>
     </header>
