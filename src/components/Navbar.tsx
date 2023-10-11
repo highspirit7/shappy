@@ -17,7 +17,11 @@ const Navbar: FC = (props) => {
   };
 
   const handleLogout = (): void => {
-    logout().catch(console.error);
+    logout()
+      .then(() => {
+        setUser(null);
+      })
+      .catch(console.error);
   };
 
   useEffect(() => {

@@ -28,7 +28,7 @@ export async function login(): Promise<void> {
 }
 
 export async function logout(): Promise<void> {
-  await signOut(auth).catch(console.error);
+  await signOut(auth);
 }
 
 export function onUserStateChanged(callback: (arg: User | null) => void): void {
