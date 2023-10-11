@@ -22,6 +22,7 @@
     "space-before-function-paren": "off",
     "semi": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/space-before-function-paren": "off"
+    "@typescript-eslint/space-before-function-paren": "off",
+    "@typescript-eslint/no-invalid-void-type": "off"
   }
 }
