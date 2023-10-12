@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingBag } from 'react-icons/fi';
 import { BsPencilFill, BsCart } from 'react-icons/bs';
 
 import { login, logout, onUserStateChanged } from '../api/firebase';
 
-import type { User } from 'firebase/auth';
+import type { FC } from 'react';
+import type { ShappyUser } from '../types/user';
+
 import Profile from './Profile';
+import Button from './ui/Button';
 
 const Navbar: FC = (props) => {
-  const [user, setUser] = useState<null | User>(null);
+  const [user, setUser] = useState<null | ShappyUser>(null);
 
   const handleLogin = (): void => {
     login().catch(console.error);
@@ -39,17 +41,21 @@ const Navbar: FC = (props) => {
       </Link>
       <nav className="flex items-center gap-2 md:gap-4 font-semibold">
         <Link to="/products">Products</Link>
-        <Link to="/cart" className="md:text-2xl">
-          <BsCart />
-        </Link>
-        <Link to="/products/add" className="md:text-2xl">
-          <BsPencilFill />
-        </Link>
+        {user != null && (
+          <Link to="/cart" className="md:text-2xl">
+            <BsCart />
+          </Link>
+        )}
+        {user?.isAdmin === true && (
+          <Link to="/products/add" className="md:text-2xl">
+            <BsPencilFill />
+          </Link>
+        )}
         {user != null && <Profile user={user} />}
         {user != null ? (
-          <button onClick={handleLogout}>Logout</button>
+          <Button text={'Logout'} onClick={handleLogout} />
         ) : (
-          <button onClick={handleLogin}>Login</button>
+          <Button text={'Login'} onClick={handleLogin} />
         )}
       </nav>
     </header>
