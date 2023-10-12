@@ -5,7 +5,7 @@ import type { User } from 'firebase/auth';
 
 const Profile: FC<{ user: User }> = ({ user: { photoURL, displayName } }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center shrink-0">
       <img
         src={photoURL ?? undefined}
         alt="user_avatar"
