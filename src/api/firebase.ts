@@ -7,7 +7,7 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 
-import type { User } from 'firebase/auth';
+import type { User } from '../types/auth';
 import { getDatabase, ref, get } from 'firebase/database';
 
 const firebaseConfig = {
@@ -34,7 +34,14 @@ export async function logout(): Promise<void> {
 export function onUserStateChanged(callback: (arg: User | null) => void): void {
   onAuthStateChanged(auth, (user) => {
     if (user != null) {
-      adminUser(user)
+      const { uid, displayName, email, photoURL } = user;
+      adminUser({
+        uid,
+        displayName,
+        email,
+        photoURL,
+        isAdmin: false
+      })
         .then((result) => {
           callback(result);
         })

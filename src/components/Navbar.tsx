@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingBag } from 'react-icons/fi';
 import { BsPencilFill, BsCart } from 'react-icons/bs';
 
-import { login, logout, onUserStateChanged } from '../api/firebase';
-
 import type { FC } from 'react';
-import type { ShappyUser } from '../types/user';
+import type { AuthContext } from '../types/auth';
 
+import { useAuthContext } from '../context/AuthContext';
 import Profile from './Profile';
 import Button from './ui/Button';
 
 const Navbar: FC = (props) => {
-  const [user, setUser] = useState<null | ShappyUser>(null);
-
-  const handleLogin = (): void => {
-    login().catch(console.error);
-  };
-
-  const handleLogout = (): void => {
-    logout()
-      .then(() => {
-        setUser(null);
-      })
-      .catch(console.error);
-  };
-
-  useEffect(() => {
-    onUserStateChanged(setUser);
-  }, []);
+  const { user, handleLogin, handleLogout }: AuthContext = useAuthContext();
 
   return (
     <header className="flex justify-between border-b border-gray-300 p-4">

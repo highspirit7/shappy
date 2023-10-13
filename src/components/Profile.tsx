@@ -1,7 +1,7 @@
 import React from 'react';
 
 import type { FC } from 'react';
-import type { User } from 'firebase/auth';
+import type { User } from '../types/auth';
 
 const Profile: FC<{ user: User }> = ({ user: { photoURL, displayName } }) => {
   return (
