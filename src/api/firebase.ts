@@ -16,7 +16,7 @@ const firebaseConfig = {
   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID
 };
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
@@ -46,6 +46,15 @@ export function onUserStateChanged(callback: (arg: User | null) => void): void {
           callback(result);
         })
         .catch(console.error);
+    } else {
+      const defaultUser = {
+        uid: '',
+        displayName: null,
+        email: null,
+        photoURL: null,
+        isAdmin: false
+      };
+      callback(defaultUser);
     }
   });
 }

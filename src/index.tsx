@@ -9,6 +9,7 @@ import MyCart from './pages/MyCart';
 import ProductDetail from './pages/ProductDetail';
 import NotFound from './pages/NotFound';
 import './index.css';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'products/add',
-        element: <AddProduct />
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            <AddProduct />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'products/:id',
@@ -30,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'cart',
-        element: <MyCart />
+        element: (
+          <ProtectedRoute requireAdmin={false}>
+            <MyCart />
+          </ProtectedRoute>
+        )
       }
     ]
   }

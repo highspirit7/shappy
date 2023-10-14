@@ -6,7 +6,7 @@ export interface User {
   photoURL: string | null;
 }
 
-export interface AuthContext {
+export interface IAuthContext {
   user: User | null;
   handleLogin: () => void;
   handleLogout: () => void;
