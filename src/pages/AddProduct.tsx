@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import type { ChangeEvent, FC, FormEvent } from 'react';
 import { type Product } from '../types/product';
 import Button from '../components/ui/Button';
+import { uploadImage } from '../api/uploader';
+import { addNewProduct } from '../api/firebase';
 
 const defaultProduct = {
   name: '',
@@ -19,6 +21,12 @@ const AddProduct: FC = (props) => {
 
   const hanldleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    if (file !== undefined) {
+      void uploadImage(file).then((data) => {
+        // Need to upload the url in data to Firebase Realtime DB
+        addNewProduct(product, data.url).catch(console.error);
+      });
+    }
   };
   const hanldleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { name, value, files } = event.target;
@@ -32,7 +40,7 @@ const AddProduct: FC = (props) => {
   return (
     <section>
       <h2>새로운 제품 등록</h2>
-      {(file != null) && (
+      {file != null && (
         <img src={URL.createObjectURL(file)} alt="selected product file" />
       )}
       <form>
@@ -52,6 +60,7 @@ const AddProduct: FC = (props) => {
           onChange={hanldleChange}
         />
         <input
+          type="number"
           name="price"
           value={product.price}
           placeholder="Price"
