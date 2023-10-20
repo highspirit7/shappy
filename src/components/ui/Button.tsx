@@ -3,13 +3,22 @@ import type { FC } from 'react';
 
 interface ButtonProps {
   text: string;
-  onClick: any;
+  onClick?: any;
+  disabled?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ text, onClick }) => {
-  return (
+const Button: FC<ButtonProps> = ({ text, onClick, disabled }) => {
+  return (disabled === true) ? (
     <button
-      className="bg-brand text-white py-2 px-4 rounded-md hover:brightness-125"
+      className="bg-brand text-white py-2 px-4 rounded-md cursor-pointer hover:brightness-125"
+      onClick={onClick}
+      disabled
+    >
+      {text}
+    </button>
+  ) : (
+    <button
+      className="bg-brand text-white py-2 px-4 rounded-md cursor-pointer hover:brightness-125"
       onClick={onClick}
     >
       {text}

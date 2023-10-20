@@ -20,3 +20,7 @@ code {
 #root {
   @apply w-full max-w-screen-2xl;
 }
+
+input {
+  @apply border border-gray-300 p-4 my-1 outline-none;
+}
