@@ -7,7 +7,7 @@ const ProductCard: FC<{ product: ProductFromDB }> = ({
   product: { image, title, category, price }
 }) => {
   return (
-    <li className="rounded-md shadow cursor-pointer">
+    <li className="transition duration-200 rounded-md shadow cursor-pointer hover:scale-105">
       <img className="w-full" src={image} alt={title} />
       <div className="mt-2 px-2 text-lg">
         <h3>{title}</h3>
