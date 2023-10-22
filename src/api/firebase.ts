@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import type { User } from '../types/auth';
 import { getDatabase, ref, get, set } from 'firebase/database';
-import type { Product } from '../types/product';
+import type { Product, ProductFromDB } from '../types/product';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -62,7 +62,7 @@ export function onUserStateChanged(callback: (arg: User | null) => void): void {
 }
 
 async function adminUser(user: User): Promise<User> {
-  return await get(ref(dbRef, `admin`))
+  return await get(ref(dbRef, `admins`))
     .then((snapshot) => {
       if (snapshot.exists()) {
         const admins = snapshot.val();
@@ -85,7 +85,18 @@ export async function addNewProduct(
   await set(ref(dbRef, `products/${id}`), {
     ...product,
     id,
-    imageURL,
-    sizes: product.sizes.split(',')
+    image: imageURL,
+    price: parseInt(product.price.toString()),
+    sizes: product.options.split(',')
+  });
+}
+
+export async function getProducts(): Promise<ProductFromDB[]> {
+  return await get(ref(dbRef, `products`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    } else {
+      return [];
+    }
   });
 }

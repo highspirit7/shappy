@@ -7,12 +7,12 @@ import { uploadImage } from '../api/uploader';
 import { addNewProduct } from '../api/firebase';
 
 const defaultProduct = {
-  name: '',
-  imageURL: '',
+  title: '',
+  image: '',
   price: 0,
   category: '',
   description: '',
-  sizes: ''
+  options: ''
 };
 
 const AddProduct: FC = (props) => {
@@ -75,8 +75,8 @@ const AddProduct: FC = (props) => {
         />
         <input
           type="text"
-          name="name"
-          value={product.name}
+          name="title"
+          value={product.title}
           placeholder="Product Name"
           required
           onChange={hanldleChange}
@@ -106,8 +106,8 @@ const AddProduct: FC = (props) => {
         <input
           className="mb-4"
           type="text"
-          name="sizes"
-          value={product.sizes}
+          name="options"
+          value={product.options}
           placeholder="Products Sizes(Separated by commas)"
           required
           onChange={hanldleChange}

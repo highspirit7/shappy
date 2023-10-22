@@ -1,8 +1,15 @@
 import React from 'react';
+
 import type { FC } from 'react';
 
-const AllProducts: FC = (props) => {
-  return <div>AllProducts</div>;
+import Products from '../components/Products';
+
+const AllProducts: FC = () => {
+  return (
+    <section>
+      <Products />
+    </section>
+  );
 };
 
 export default AllProducts;

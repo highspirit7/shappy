@@ -1,8 +1,12 @@
 export interface Product {
-    name: string;
-    imageURL : string;
+    title: string;
+    image : string;
     price: number;
     category: string;
     description: string;
-    sizes : string;
+    options : string;
+}
+
+export interface ProductFromDB extends Product {
+    id: string;
 }

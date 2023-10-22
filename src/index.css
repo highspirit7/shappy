@@ -18,7 +18,7 @@ code {
 }
 
 #root {
-  @apply w-full max-w-screen-2xl;
+  @apply w-full max-w-screen-2xl min-h-screen bg-white flex flex-col;
 }
 
 input {
