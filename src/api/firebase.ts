@@ -100,3 +100,13 @@ export async function getProducts(): Promise<ProductFromDB[]> {
     }
   });
 }
+
+export async function getProductById(id: string): Promise<ProductFromDB> {
+  return await get(ref(dbRef, `products/${id}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      return undefined;
+    }
+  });
+}
